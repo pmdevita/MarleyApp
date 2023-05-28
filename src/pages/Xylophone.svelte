@@ -1,7 +1,7 @@
 <script>
   import Key from "../lib/Key.svelte";
   import { Soundfont } from "smplr";
-  import MarimbaSounds from "../midi/marimba-mp3.js?url";
+  import MarimbaSounds from "../midi/xylophone-mp3.js?url";
   import {diatonicScale} from "../utils.js";
 
   let ref;
@@ -16,7 +16,11 @@
   const play = (num) => {
     if (!audioContext) {
       audioContext = new window.AudioContext();
-      marimba = new Soundfont(audioContext, {instrument: window.location.origin + MarimbaSounds});
+      let instrumentURL = MarimbaSounds;
+      if (!instrumentURL.startsWith("http")) {
+        instrumentURL = window.location.origin + instrumentURL;
+      }
+      marimba = new Soundfont(audioContext, {instrument: instrumentURL});
       return;
     }
     let noteNum = diatonicScale[num % diatonicScale.length] + Math.floor(num / diatonicScale.length) * (diatonicScale[diatonicScale.length - 1] + 1);
