@@ -24,7 +24,7 @@
       return;
     }
     let noteNum = diatonicScale[num % diatonicScale.length] + Math.floor(num / diatonicScale.length) * (diatonicScale[diatonicScale.length - 1] + 1);
-    marimba.start({note: 60 + noteNum});
+    marimba.start({note: 72 + noteNum});
   }
 
 </script>
